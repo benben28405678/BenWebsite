@@ -53,6 +53,21 @@ img {
   margin-right: auto;
 }
 
+.stack_embed {
+  width: 500px;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.git_embed {
+  width: 100%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 small {
   color: gray;
 }
@@ -126,18 +141,4 @@ hr {
   color: #ffaaff;
   background-color: #222222;
   border-radius: 30px;
-}
-
-/* Set a specific color for each brand */
-
-/* Facebook */
-.fa-facebook {
-  background: none;
-  color: white;
-}
-
-/* Insta */
-.fa-instagram {
-  background: none;
-  color: white;
 }
