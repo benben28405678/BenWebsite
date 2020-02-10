@@ -97,6 +97,14 @@ a {
   color: white;
 }
 
+.small_link {
+  color: gray;
+}
+
+.small_link:hover {
+  color: #ff00ff;
+}
+
 a:hover {
   color: #80f0ff;
   background-color: black;
