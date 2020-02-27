@@ -85,7 +85,7 @@ small {
   font-weight: bold;
 }
 
-input {
+input, textarea {
   margin: 5px 0px 5px 0px;
   background-color: black;
   color: white;
@@ -146,6 +146,11 @@ hr {
 
 .code {
   font-family: 'Roboto Mono', monospace;
+}
+
+.required {
+  font-family: 'Roboto Mono', monospace;
+  color: red;
 }
   
 /* Style all font awesome icons */

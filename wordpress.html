@@ -55,15 +55,22 @@
     </p>
 
     <form action="/action_page.php">
-      First name<br />
+      First name <span class="required">*</span><br />
+      <input type="text" name="firstname" value="" required/>
+      <br />
+      Last name <span class="required">*</span><br />
+      <input type="text" name="lastname" value="" required/>
+      <br />
+      Contact Email <span class="required">*</span><br />
+      <input type="text" name="firstname" value="" required/>
+      <br />
+      Contact Phone<br />
       <input type="text" name="firstname" value="" />
       <br />
-      Last name<br />
-      <input type="text" name="lastname" value="" />
-      First name<br />
-      <input type="text" name="firstname" value="" />
+      Information<br />
+      <textarea type="text" name="firstname" value="" style="height: 100px;"> </textarea>
       <br /><br />
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Submit" action="wordpress.php"/>
     </form>
   </body>
 </html>
