@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lotto Balancer</title>
+    <link rel="icon" href="https://is3-ssl.mzstatic.com/image/thumb/Purple123/v4/5b/3d/c9/5b3dc9fb-0168-5e08-c06e-c3dc2b599e5b/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.png">
+
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <h2>Publix Lotto Balancer Calculator</h2>
+
+    <div id="listDefine">
+      <p>Define the Lotto List:</p>
+
+      <input
+        id="multiples"
+        name="multiples"
+        style="width: 500px; padding: 5px"
+      />
+
+      <button
+        id="update"
+        class="formButton"
+        type="button"
+        onclick="updateMultiples()"
+      >
+        Update
+      </button>
+      <button
+        id="revert"
+        class="formButton"
+        type="button"
+        onclick="revertMultiples()"
+      >
+        Revert
+      </button>
+
+      <p id="mList">
+        $ 30,30,30,30,20,20,20,20,10,5,10,10,5,5,5,5,3,2,2,2,2,2,1,1
+      </p>
+
+      <br /><br />
+    </div>
+
+    <div id="submitArea">
+      <p>
+        Enter each count:
+      </p>
+
+      <span id="expected">x</span>
+      <input
+        style="width: 100px; padding: 5px"
+        pattern="[0-9]*"
+        id="numb"
+        type="number"
+        name="quantity"
+        min="0"
+        max="120"
+        autofocus
+      />
+
+      <button
+        id="submit"
+        style="width: 100px"
+        class="formButton"
+        type="button"
+        onclick="countSubmit()"
+      >
+        Submit
+      </button>
+    </div>
+
+    <p id="status">
+      Status: Please enter a number above and press submit.
+    </p>
+
+    <table id="demo" style="margin: 10px; width: 40%"></table>
+
+    <p id="sum" style="padding: 5px; background-color: #444444;">Total: --</p>
+
+    <script>
+      var index = 0;
+      var defaultMultiples = [
+        30,
+        30,
+        30,
+        30,
+        20,
+        20,
+        20,
+        20,
+        10,
+        5,
+        10,
+        10,
+        5,
+        5,
+        5,
+        5,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1
+      ];
+      var multiples = defaultMultiples;
+      var list = [];
+
+      var total = 0;
+      var output =
+        "<tr>\
+        <th>Item</th>\
+        <th>Count</th>\
+        <th>Value</th>\
+        <th>Total</th>\
+      </tr>";
+
+      document.getElementById("expected").innerHTML = "$" + multiples[0] + " x";
+
+      function updateMultiples() {
+        multiples = document.getElementById("multiples").value.split`,`.map(
+          x => +x
+        );
+
+        document.getElementById("mList").innerHTML = "$ " + multiples;
+
+        document.getElementById("expected").innerHTML =
+          "$" + multiples[0] + " x";
+        index = 0;
+      }
+
+      function revertMultiples() {
+        multiples = defaultMultiples;
+
+        document.getElementById("mList").innerHTML = "$ " + multiples;
+      }
+
+      function isNumeric(value) {
+        return /^-{0,1}\d+$/.test(value);
+      }
+
+      function countSubmit() {
+        var x, text;
+
+        // Get the value of the input field with id="numb"
+        x = document.getElementById("numb").value;
+
+        // If x is Not a Number or less than one or greater than 10
+        
+        
+        if (isNaN(x) || x < 0 || x > 350 || !isNumeric(x)) {
+          text = '<span style="color: red">Input not valid</span>.';
+        } else {
+          text =
+            '<span style="color: #00ff00">Input (' +
+            x +
+            ") OK</span>. Completion: " +
+            (index + 1) +
+            "/" +
+            multiples.length;
+          list.push(x);
+          if(x == 0) {
+            output +=
+            '<tr><td style="color: #aaaaaa">' +
+            (index + 1) +
+            "</td> " +
+            "<td>x" +
+            x +
+            "</td><td>$ " +
+            multiples[index] +
+            '</td><td style="color: #aaaaaa">$' +
+            x * multiples[index] +
+            "</td></tr>";
+          } else {
+            output +=
+            '<tr><td style="color: #aaaaaa">' +
+            (index + 1) +
+            "</td> " +
+            "<td>x" +
+            x +
+            "</td><td>$ " +
+            multiples[index] +
+            '</td><td style="color: #ffff00">$' +
+            x * multiples[index] +
+            "</td></tr>";
+          }
+          
+
+          total += x * multiples[index];
+          index += 1;
+          document.getElementById("listDefine").style.display = "none";
+
+          if (index >= multiples.length) {
+            document.getElementById("submit").disabled = true;
+            document.getElementById("submitArea").style.display = "none";
+            document.getElementById("status").innerHTML =
+              '<span style="color: #00ffff">Complete</span>. Your scratch-off total is <span style="color: #00ffff">$' +
+              total +
+              "</span>.";
+          } else {
+            document.getElementById("submit").disabled = false;
+            document.getElementById("status").innerHTML = text;
+          }
+        }
+
+        document.getElementById("expected").innerHTML =
+          "$" + multiples[index] + " x";
+        document.getElementById("numb").value = "";
+        document.getElementById("demo").innerHTML = output;
+        document.getElementById("sum").innerHTML =
+          "Scratch-Off Total: $" + total + " (" + index + " items)";
+
+        document.getElementById("numb").focus();
+      }
+    </script>
+  </body>
+</html>

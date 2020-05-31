@@ -85,11 +85,31 @@ small {
   font-weight: bold;
 }
 
+.formButton {
+  background-color: #000000;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
 input, textarea {
   margin: 5px 0px 5px 0px;
   background-color: black;
   color: white;
-  border: 1px solid #aaaaaa;
+  border: 1px solid white;
   padding: 5px;
   width: 300px;
   font-size: 16px;
